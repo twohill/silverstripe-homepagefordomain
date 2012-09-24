@@ -1,0 +1,22 @@
+{
+	"name": "silverstripe-labs/homepagefordomain",
+	"description": "Allows to designate a page anywhere in the tree
+		as the homepage for a specific domain, overruling the usual
+		homepage (which is identified by the 'home' URLSegment).",
+	"type": "silverstripe-module",
+	"keywords": ["silverstripe-labs", "homepagefordomain"],
+	"authors": [
+	{
+		"name": "Sam Minnée",
+		"email": "sam@silverstripe.com"
+	},
+	{
+		"name": "Ingo Schommer",
+		"email": "ingo@silverstripe.com"
+	}
+	],
+	"require":
+	{
+		"silverstripe/framework": "3.*"
+	}
+}
