@@ -1,0 +1,21 @@
+{
+	"name":"silverstripe/homepagefordomain",
+	"type": "silverstripe-module",
+	"description": "Allows to designate a page anywhere in the tree as the homepage for a specific domain, overruling the usual homepage (which is identified by the 'home' URLSegment).",
+	"keywords": ["silverstripe", "cms", "homepage", "domain", "subsites", "redirect"],
+	"license": "BSD-3-Clause",
+	"homepage": "https://github.com/silverstripe-labs/silverstripe-homepagefordomain/",
+	"authors":[
+		{
+			"name": "Ingo Schommer",
+			"homepage": "http://chillu.com",
+			"email" : "ingo@silverstripe.com"
+		}
+	],
+	"require": 
+		{
+			"php": ">=5.3.2",
+			"silverstripe/framework": "*",
+		}
+	}
+}
