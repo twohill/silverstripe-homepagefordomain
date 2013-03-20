@@ -6,7 +6,7 @@ class HomepageForDomainExtension extends DataExtension {
 	 */
 	public static $write_homepage_map = true;
 
-	public function extraStatics() {
+	public function extraStatics($class = null, $extension = null) {
 		return array(
 			'db' => array(
 				"HomepageForDomain" => "Varchar(100)",
@@ -46,7 +46,7 @@ class HomepageForDomainExtension extends DataExtension {
 		}
 	}
 
-	public function updateFieldLabels($labels) {
+	public function updateFieldLabels(&$labels) {
 		$labels['HomepageForDomain'] = _t('SiteTree.HomepageForDomain', 'Hompage for this domain');
 	}
 
