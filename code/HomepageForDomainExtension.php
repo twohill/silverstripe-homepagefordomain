@@ -26,7 +26,7 @@ class HomepageForDomainExtension extends DataExtension {
 			),
 			new TextField(
 				"HomepageForDomain",
-				_t('SiteTree.HOMEPAGEFORDOMAIN', "Domain(s)", PR_MEDIUM, 'Listing domains that should be used as homepage')
+				_t('SiteTree.HOMEPAGEFORDOMAIN', "Domain(s)", 'Listing domains that should be used as homepage')
 			)
 		));
 	}
