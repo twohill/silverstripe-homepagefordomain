@@ -6,13 +6,9 @@ class HomepageForDomainExtension extends DataExtension {
 	 */
 	public static $write_homepage_map = true;
 
-	public function extraStatics($class = null, $extension = null) {
-		return array(
-			'db' => array(
-				"HomepageForDomain" => "Varchar(100)",
-			)
-		);
-	}
+	static	$db = array(
+		"HomepageForDomain" => "Varchar(100)"
+	);
 
 	public function updateSettingsFields(&$fields) {
 		$fields->addFieldsToTab("Root.Settings", array(
@@ -26,7 +22,7 @@ class HomepageForDomainExtension extends DataExtension {
 			),
 			new TextField(
 				"HomepageForDomain",
-				_t('SiteTree.HOMEPAGEFORDOMAIN', "Domain(s)", PR_MEDIUM, 'Listing domains that should be used as homepage')
+				_t('SiteTree.HOMEPAGEFORDOMAIN', "Domain(s)", 'Listing domains that should be used as homepage')
 			)
 		));
 	}
