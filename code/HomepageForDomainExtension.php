@@ -6,7 +6,7 @@ class HomepageForDomainExtension extends DataExtension {
 	 */
 	public static $write_homepage_map = true;
 
-	static	$db = array(
+	private static $db = array(
 		"HomepageForDomain" => "Varchar(100)"
 	);
 
