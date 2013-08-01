@@ -5,14 +5,10 @@ class HomepageForDomainExtension extends DataExtension {
 	 * Whether or not to write the homepage map for static publisher
 	 */
 	public static $write_homepage_map = true;
-
-	public function extraStatics($class = null, $extension = null) {
-		return array(
-			'db' => array(
-				"HomepageForDomain" => "Varchar(100)",
-			)
-		);
-	}
+	
+	static $db = array(
+		"HomepageForDomain" => "Varchar(100)"	
+	);
 
 	public function updateSettingsFields(&$fields) {
 		$fields->addFieldsToTab("Root.Settings", array(
