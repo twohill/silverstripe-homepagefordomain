@@ -8,7 +8,7 @@ the usual homepage (which is identified by the "home" URLSegment).
 
 ## Requirements
 
- * SilverStripe 3.x
+ * SilverStripe 3.0
 
 ## Maintainer
 
