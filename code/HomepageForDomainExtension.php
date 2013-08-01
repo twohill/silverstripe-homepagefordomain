@@ -6,13 +6,9 @@ class HomepageForDomainExtension extends DataExtension {
 	 */
 	public static $write_homepage_map = true;
 
-	public function extraStatics($class = null, $extension = null) {
-		return array(
-			'db' => array(
-				"HomepageForDomain" => "Varchar(100)",
-			)
-		);
-	}
+	private static $db = array(
+		"HomepageForDomain" => "Varchar(100)",
+	);
 
 	public function updateSettingsFields(&$fields) {
 		$fields->addFieldsToTab("Root.Settings", array(
