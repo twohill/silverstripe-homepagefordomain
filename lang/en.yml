@@ -1,0 +1,6 @@
+en:
+  SiteTree:
+    NOTEUSEASHOMEPAGE: "Use this page as the 'home page' for the following domains: (separate multiple domains with commas)"
+    HomepageForDomain: 'Hompage for this domain'
+    HOMEPAGEFORDOMAIN:
+      Domain(s): 'Listing domains that should be used as homepage'
