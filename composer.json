@@ -12,7 +12,7 @@
 			"email" : "ingo@silverstripe.com"
 		}
 	],
-	"require": 
+	"require":
 		{
 			"silverstripe/framework": "~3.1"
 		}

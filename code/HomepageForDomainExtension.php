@@ -13,10 +13,10 @@ class HomepageForDomainExtension extends DataExtension {
 	public function updateSettingsFields(&$fields) {
 		$fields->addFieldsToTab("Root.Settings", array(
 			new LiteralField(
-				"HomepageForDomainInfo", 
-				"<p>" . 
-					_t('SiteTree.NOTEUSEASHOMEPAGE', 
-					"Use this page as the 'home page' for the following domains: 
+				"HomepageForDomainInfo",
+				"<p>" .
+					_t('SiteTree.NOTEUSEASHOMEPAGE',
+					"Use this page as the 'home page' for the following domains:
 					(separate multiple domains with commas)") .
 				"</p>"
 			),
@@ -52,7 +52,7 @@ class HomepageForDomainExtension extends DataExtension {
 	public static function generate_homepage_domain_map() {
 		$domainSpecificHomepages = Versioned::get_by_stage('Page', 'Live', "\"HomepageForDomain\" != ''", "\"URLSegment\" ASC");
 		if (!$domainSpecificHomepages) return false;
-		
+
 		$map = array();
 		foreach($domainSpecificHomepages->map('URLSegment', 'HomepageForDomain') as $url => $domains) {
 			foreach(explode(',', $domains) as $domain) $map[$domain] = $url;
