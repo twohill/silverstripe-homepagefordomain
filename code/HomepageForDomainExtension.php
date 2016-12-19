@@ -18,7 +18,7 @@ class HomepageForDomainExtension extends DataExtension
                 "HomepageForDomainInfo",
                 "<p>" .
                     _t('SiteTree.NOTEUSEASHOMEPAGE',
-                    "Use this page as the 'home page' for the following domains: 
+                    "Use this page as the 'home page' for the following domains:
 					(separate multiple domains with commas)") .
                 "</p>"
             ),
@@ -33,11 +33,14 @@ class HomepageForDomainExtension extends DataExtension
     {
         // Check to write CMS homepage map.
         $usingStaticPublishing = false;
-        foreach (ClassInfo::subclassesFor('StaticPublisher') as $class) {
-            if ($this->owner->hasExtension($class)) {
-                $usingStaticPublishing = true;
-            }
-        }
+		$staticPublisherSubClasses = ClassInfo::subclassesFor('StaticPublisher');
+		if ($staticPublisherSubClasses) {
+			foreach ($staticPublisherSubClasses as $class) {
+				if ($this->owner->hasExtension($class)) {
+					$usingStaticPublishing = true;
+				}
+			}
+		}
 
         // Ff you change the path here, you must also change it in sapphire/static-main.php
         if (self::$write_homepage_map) {
@@ -65,7 +68,7 @@ class HomepageForDomainExtension extends DataExtension
         if (!$domainSpecificHomepages) {
             return false;
         }
-        
+
         $map = array();
         foreach ($domainSpecificHomepages->map('URLSegment', 'HomepageForDomain') as $url => $domains) {
             foreach (explode(',', $domains) as $domain) {
