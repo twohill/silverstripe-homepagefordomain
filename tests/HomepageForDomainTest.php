@@ -10,7 +10,7 @@ class HomepageForDomainTest extends SapphireTest
     {
         parent::setUp();
         
-        Object::add_extension("SiteTree", "FilesystemPublisher('assets/HomepageForDomainTest-static-folder/')");
+        SS_Object::add_extension("SiteTree", "FilesystemPublisher('assets/HomepageForDomainTest-static-folder/')");
         HomepageForDomainExtension::$write_homepage_map = false;
         
         $this->orig['domain_based_caching'] = FilesystemPublisher::$domain_based_caching;
@@ -21,7 +21,7 @@ class HomepageForDomainTest extends SapphireTest
     {
         parent::tearDown();
 
-        Object::remove_extension("SiteTree", "FilesystemPublisher('assets/HomepageForDomainTest-static-folder/')");
+        SS_Object::remove_extension("SiteTree", "FilesystemPublisher('assets/HomepageForDomainTest-static-folder/')");
         HomepageForDomainExtension::$write_homepage_map = true;
 
         FilesystemPublisher::$domain_based_caching = $this->orig['domain_based_caching'];
