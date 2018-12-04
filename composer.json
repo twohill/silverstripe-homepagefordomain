@@ -1,6 +1,6 @@
 {
 	"name":"silverstripe/homepagefordomain",
-	"type": "silverstripe-module",
+	"type": "silverstripe-vendormodule",
 	"description": "Allows to designate a page anywhere in the tree as the homepage for a specific domain, overruling the usual homepage (which is identified by the 'home' URLSegment).",
 	"keywords": ["silverstripe", "cms", "homepage", "domain", "subsites", "redirect"],
 	"license": "BSD-3-Clause",
@@ -12,8 +12,13 @@
 			"email" : "ingo@silverstripe.com"
 		}
 	],
-	"require": 
+    "autoload": {
+        "psr-4": {
+            "": ["code/", "tests/"]
+        }
+    },
+	"require":
 		{
-			"silverstripe/framework": "~3.1"
+			"silverstripe/framework": "^4"
 		}
 }
