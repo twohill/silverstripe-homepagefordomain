@@ -24,10 +24,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "Twohill\\HomepageForDomain\\": [
-        "code/",
-        "tests/"
-      ]
+      "Twohill\\HomepageForDomain\\": "code/"
     }
   },
   "require": {
