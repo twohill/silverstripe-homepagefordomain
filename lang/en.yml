@@ -1,5 +1,5 @@
 en:
-  SilverStripe\CMS\Model\SiteTree:
+  Twohill\HomepageForDomain\HomepageForDomainExtension:
     NOTEUSEASHOMEPAGE: "Use this page as the 'home page' for the following domains: (separate multiple domains with commas)"
     HomepageForDomain: 'Hompage for this domain'
-    HOMEPAGEFORDOMAIN: 'Listing domains that should be used as homepage'
+    Domains: 'Listing domains that should be used as homepage'

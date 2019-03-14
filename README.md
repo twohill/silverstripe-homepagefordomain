@@ -8,9 +8,10 @@ the usual homepage (which is identified by the "home" URLSegment).
 
 ## Requirements
 
- * SilverStripe 3.1+
+ * SilverStripe 4
 
 ## Maintainer
 
+ * Al Twohill (al at twohill dot nz)
  * Sam Minnée (sam at silverstripe dot com)
  * Ingo Schommer (ingo at silverstripe dot com)
