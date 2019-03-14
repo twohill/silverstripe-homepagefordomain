@@ -12,6 +12,4 @@ the usual homepage (which is identified by the "home" URLSegment).
 
 ## Maintainer
 
- * Al Twohill (al at twohill dot nz)
- * Sam Minnée (sam at silverstripe dot com)
- * Ingo Schommer (ingo at silverstripe dot com)
+ * Al Twohill <al@twohill.nz>
