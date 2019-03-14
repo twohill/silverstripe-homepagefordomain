@@ -1,7 +1,14 @@
 <?php
+
+namespace Twohill\HomepageForDomain;
+
+use SilverStripe\CMS\Controllers\RootURLController;
+use SilverStripe\CMS\Model\SiteTree;
+use SilverStripe\Dev\SapphireTest;
+
 class HomepageForDomainTest extends SapphireTest
 {
-    
+
     protected $usesDatabase = true;
 
     public static $fixture_file = 'HomepageForDomainTest.yml';
@@ -9,32 +16,32 @@ class HomepageForDomainTest extends SapphireTest
     public function setUp()
     {
         parent::setUp();
-        
-        SS_Object::add_extension("SiteTree", "FilesystemPublisher('assets/HomepageForDomainTest-static-folder/')");
+
+        //SS_Object::add_extension("SiteTree", "FilesystemPublisher('assets/HomepageForDomainTest-static-folder/')");
         HomepageForDomainExtension::$write_homepage_map = false;
-        
-        $this->orig['domain_based_caching'] = FilesystemPublisher::$domain_based_caching;
-        FilesystemPublisher::$domain_based_caching = false;
+
+       // $this->orig['domain_based_caching'] = FilesystemPublisher::$domain_based_caching;
+        //FilesystemPublisher::$domain_based_caching = false;
     }
-    
+
     public function tearDown()
     {
         parent::tearDown();
 
-        SS_Object::remove_extension("SiteTree", "FilesystemPublisher('assets/HomepageForDomainTest-static-folder/')");
+        //SS_Object::remove_extension("SiteTree", "FilesystemPublisher('assets/HomepageForDomainTest-static-folder/')");
         HomepageForDomainExtension::$write_homepage_map = true;
 
-        FilesystemPublisher::$domain_based_caching = $this->orig['domain_based_caching'];
+        //FilesystemPublisher::$domain_based_caching = $this->orig['domain_based_caching'];
 
-        if (file_exists(BASE_PATH . '/assets/HomepageForDomainTest-static-folder')) {
-            Filesystem::removeFolder(BASE_PATH . '/assets/HomepageForDomainTest-static-folder');
-        }
+//        if (file_exists(BASE_PATH . '/assets/HomepageForDomainTest-static-folder')) {
+//            Filesystem::removeFolder(BASE_PATH . '/assets/HomepageForDomainTest-static-folder');
+//        }
     }
-    
+
     public function testStaticPublishing()
     {
         $this->logInWithPermission('ADMIN');
-        
+
         $p1 = new Page();
         $p1->URLSegment = strtolower(__CLASS__).'-page-1';
         $p1->HomepageForDomain = '';
@@ -50,9 +57,9 @@ class HomepageForDomainTest extends SapphireTest
         $p3->HomepageForDomain = 'domain2,domain3';
         $p3->write();
         $p3->doPublish();
-        
+
         $map = HomepageForDomainExtension::generate_homepage_domain_map();
-        
+
         $this->assertEquals(
             $map,
             array(
@@ -84,27 +91,27 @@ class HomepageForDomainTest extends SapphireTest
 
             'only.com' => 'page3',
             'www.only.com' => 'page3',
-            
+
             'www.somethingelse.com' => 'home',
             'somethingelse.com' => 'home',
-            
+
             // Test some potential false matches to page2 and page3
             'alternate.only.com' => 'home',
             'www.alternate.only.com' => 'home',
             'alternate.something.com' => 'home',
         );
-        
+
         foreach ($tests as $domain => $urlSegment) {
             RootURLController::reset();
             $_SERVER['HTTP_HOST'] = $domain;
-            
+
             $this->assertEquals(
                 $urlSegment,
                 RootURLController::get_homepage_link(),
                 "Testing $domain matches $urlSegment"
             );
         }
-        
+
         $_SERVER['HTTP_HOST'] = $originalHost;
     }
 
@@ -112,23 +119,23 @@ class HomepageForDomainTest extends SapphireTest
     {
         $default = $this->objFromFixture('Page', 'home');
         $nested  = $this->objFromFixture('Page', 'nested');
-        
+
         SiteTree::disable_nested_urls();
         $this->assertEquals('home', RootURLController::get_homepage_link());
         SiteTree::enable_nested_urls();
         $this->assertEquals('home', RootURLController::get_homepage_link());
-        
+
         $nested->HomepageForDomain = str_replace('www.', null, $_SERVER['HTTP_HOST']);
         $nested->write();
-        
+
         RootURLController::reset();
         SiteTree::disable_nested_urls();
         $this->assertEquals('nested-home', RootURLController::get_homepage_link());
-        
+
         RootURLController::reset();
         SiteTree::enable_nested_urls();
         $this->assertEquals('home/nested-home', RootURLController::get_homepage_link());
-        
+
         $nested->HomepageForDomain = null;
         $nested->write();
     }

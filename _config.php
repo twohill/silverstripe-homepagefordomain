@@ -1,7 +1,6 @@
 <?php
+//Compatibility with SS4.3
 
-if (!class_exists('SS_Object')) {
-    class_alias('Object', 'SS_Object');
-}
+// TODO: adjust this to check for presence of extension function on SilverStripe\CMS\Controllers\RootURLController
 
-SS_Object::add_extension('SiteTree', 'HomepageForDomainExtension');
+class_alias('Twohill\HomepageForDomain\HomepageForDomainExtension', 'HomepageForDomainExtension');

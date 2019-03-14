@@ -1,12 +1,27 @@
 <?php
+
+namespace Twohill\HomepageForDomain;
+
+use SilverStripe\Core\ClassInfo;
+use SilverStripe\Forms\TextField;
+use SilverStripe\ORM\DataExtension;
+use SilverStripe\CMS\Model\SiteTree;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\Versioned\Versioned;
+
 class HomepageForDomainExtension extends DataExtension
 {
 
     /**
      * Whether or not to write the homepage map for static publisher
+     *
+     * @var boolean
      */
     public static $write_homepage_map = true;
 
+    /**
+     * @var array
+     */
     private static $db = array(
         "HomepageForDomain" => "Varchar(100)",
     );
@@ -17,14 +32,14 @@ class HomepageForDomainExtension extends DataExtension
             new LiteralField(
                 "HomepageForDomainInfo",
                 "<p>" .
-                    _t('SiteTree.NOTEUSEASHOMEPAGE',
+                _t(__CLASS__ . '.NOTEUSEASHOMEPAGE',
                     "Use this page as the 'home page' for the following domains:
-					(separate multiple domains with commas)") .
+                        (separate multiple domains with commas)") .
                 "</p>"
             ),
             new TextField(
                 "HomepageForDomain",
-                _t('SiteTree.HOMEPAGEFORDOMAIN', "Domain(s)", 'Listing domains that should be used as homepage')
+                _t(__CLASS__ . '.Domains', 'Listing domains that should be used as homepage')
             )
         ));
     }
@@ -33,22 +48,23 @@ class HomepageForDomainExtension extends DataExtension
     {
         // Check to write CMS homepage map.
         $usingStaticPublishing = false;
-		$staticPublisherSubClasses = ClassInfo::subclassesFor('StaticPublisher');
-		if ($staticPublisherSubClasses) {
-			foreach ($staticPublisherSubClasses as $class) {
-				if ($this->owner->hasExtension($class)) {
-					$usingStaticPublishing = true;
-				}
-			}
-		}
+        $staticPublisherSubClasses = ClassInfo::subclassesFor('StaticPublisher');
+        if ($staticPublisherSubClasses) {
+            foreach ($staticPublisherSubClasses as $class) {
+                if ($this->owner->hasExtension($class)) {
+                    $usingStaticPublishing = true;
+                }
+            }
+        }
 
         // Ff you change the path here, you must also change it in sapphire/static-main.php
         if (self::$write_homepage_map) {
             if ($usingStaticPublishing && $map = self::generate_homepage_domain_map()) {
-                @file_put_contents(BASE_PATH.'/'.ASSETS_DIR.'/_homepage-map.php', "<?php\n\$homepageMap = ".var_export($map, true)."; ?>");
+                @file_put_contents(BASE_PATH . '/' . ASSETS_DIR . '/_homepage-map.php',
+                    "<?php\n\$homepageMap = " . var_export($map, true) . "; ?>");
             } else {
-                if (file_exists(BASE_PATH.'/'.ASSETS_DIR.'/_homepage-map.php')) {
-                    unlink(BASE_PATH.'/'.ASSETS_DIR.'/_homepage-map.php');
+                if (file_exists(BASE_PATH . '/' . ASSETS_DIR . '/_homepage-map.php')) {
+                    unlink(BASE_PATH . '/' . ASSETS_DIR . '/_homepage-map.php');
                 }
             }
         }
@@ -56,7 +72,7 @@ class HomepageForDomainExtension extends DataExtension
 
     public function updateFieldLabels(&$labels)
     {
-        $labels['HomepageForDomain'] = _t('SiteTree.HomepageForDomain', 'Hompage for this domain');
+        $labels['HomepageForDomain'] = _t(SiteTree::class . '.HomepageForDomain', 'Hompage for this domain');
     }
 
     /**
@@ -64,7 +80,8 @@ class HomepageForDomainExtension extends DataExtension
      */
     public static function generate_homepage_domain_map()
     {
-        $domainSpecificHomepages = Versioned::get_by_stage('Page', 'Live', "\"HomepageForDomain\" != ''", "\"URLSegment\" ASC");
+        $domainSpecificHomepages = Versioned::get_by_stage(\Page::class, 'Live', "\"HomepageForDomain\" != ''",
+            "\"URLSegment\" ASC");
         if (!$domainSpecificHomepages) {
             return false;
         }
@@ -78,3 +95,4 @@ class HomepageForDomainExtension extends DataExtension
         return $map;
     }
 }
+

@@ -1,6 +1,5 @@
 de:
-  SiteTree:
+  Twohill\HomepageForDomain\HomepageForDomainExtension:
     NOTEUSEASHOMEPAGE: 'Diese Seite als Startseite für folgende Domains verwenden: (Mehrere Domains mit Komma trennen)'
     HomepageForDomain: 'Startseite für diese Domain'
-    HOMEPAGEFORDOMAIN:
-      Domain(s): 'Listet Domains auf die als Startseite verwendet werden'
+    Domains: 'Listet Domains auf die als Startseite verwendet werden'
