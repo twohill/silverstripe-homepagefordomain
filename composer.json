@@ -28,6 +28,6 @@
     }
   },
   "require": {
-    "silverstripe/cms": "^4"
+    "silverstripe/cms": "^4.4"
   }
 }
