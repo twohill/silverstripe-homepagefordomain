@@ -8,7 +8,7 @@ This module replaces `silverstripe/homepagefordomain`, which has been abandoned.
 
 ## Requirements
 
- * SilverStripe 4
+ * SilverStripe 4.4+
  
 ## Installation
 
