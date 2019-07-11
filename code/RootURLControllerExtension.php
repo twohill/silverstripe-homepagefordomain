@@ -16,15 +16,17 @@ class RootURLControllerExtension extends Extension
      */
     public function updateHomePageLink(&$link)
     {
-        $host = str_replace('www.', null, $_SERVER['HTTP_HOST']);
-        $candidates = SiteTree::get()->where(array(
-            '"SiteTree"."HomepageForDomain" LIKE ?' => "%$host%"
-        ));
-        if ($candidates) {
-            /** @var SiteTree $candidate */
-            foreach ($candidates as $candidate) {
-                if (preg_match('/(,|^) *' . preg_quote($host) . ' *(,|$)/', $candidate->HomepageForDomain)) {
-                    $link = trim($candidate->RelativeLink(true), '/');
+        if (isset($_SERVER['HTTP_HOST'])) {
+            $host = str_replace('www.', null, $_SERVER['HTTP_HOST']);
+            $candidates = SiteTree::get()->where(array(
+                '"SiteTree"."HomepageForDomain" LIKE ?' => "%$host%"
+            ));
+            if ($candidates) {
+                /** @var SiteTree $candidate */
+                foreach ($candidates as $candidate) {
+                    if (preg_match('/(,|^) *' . preg_quote($host) . ' *(,|$)/', $candidate->HomepageForDomain)) {
+                        $link = trim($candidate->RelativeLink(true), '/');
+                    }
                 }
             }
         }
