@@ -20,14 +20,14 @@ class RootURLControllerExtension extends Extension
         $candidates = SiteTree::get()->where([
             '"SiteTree"."HomepageForDomain" LIKE ?' => "%$host%"
         ]);
-        if ($candidates) {
-            /** @var SiteTree $candidate */
-            foreach ($candidates as $candidate) {
-                if (preg_match('/(,|^) *' . preg_quote($host) . ' *(,|$)/', $candidate->HomepageForDomain)) {
-                    $link = trim($candidate->RelativeLink(true), '/');
-                }
+
+        /** @var SiteTree $candidate */
+        foreach ($candidates as $candidate) {
+            if (preg_match('/(,|^) *' . preg_quote($host) . ' *(,|$)/', $candidate->HomepageForDomain)) {
+                $link = trim($candidate->RelativeLink(true), '/');
             }
         }
+
         return $link;
     }
 }
