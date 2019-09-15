@@ -1,3 +1,6 @@
 SilverStripe\CMS\Model\SiteTree:
   extensions:
     - Twohill\HomepageForDomain\HomepageForDomainExtension
+SilverStripe\CMS\Controllers\RootURLController:
+  extensions:
+    - Twohill\HomepageForDomain\RootURLControllerExtension
