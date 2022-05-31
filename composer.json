@@ -1,5 +1,5 @@
 {
-	"name":"silverstripe/homepagefordomain",
+	"name":"twohill/silverstripe-homepagefordomain",
 	"type": "silverstripe-module",
 	"description": "Allows to designate a page anywhere in the tree as the homepage for a specific domain, overruling the usual homepage (which is identified by the 'home' URLSegment).",
 	"keywords": ["silverstripe", "cms", "homepage", "domain", "subsites", "redirect"],
@@ -14,6 +14,6 @@
 	],
 	"require": 
 		{
-			"silverstripe/cms": "3.0.x"
+			"silverstripe/framework": "~3.1"
 		}
 }
