@@ -16,7 +16,7 @@ class RootURLControllerExtension extends Extension
      */
     public function updateHomepageLink(&$link)
     {
-        $host = str_replace('www.', null, $_SERVER['HTTP_HOST']);
+        $host = str_replace('www.', '', $_SERVER['HTTP_HOST']);
         $candidates = SiteTree::get()->where([
             '"SiteTree"."HomepageForDomain" LIKE ?' => "%$host%"
         ]);
