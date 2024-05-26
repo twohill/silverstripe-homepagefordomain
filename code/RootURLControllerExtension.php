@@ -16,9 +16,10 @@ class RootURLControllerExtension extends Extension
      */
     public function updateHomepageLink(&$link)
     {
+
         // Evaluate only when $_SERVER['HTTP_HOST'] is defined, i.e. skip CLI where there's no HTTP_HOST set
         if (isset($_SERVER['HTTP_HOST'])) {
-            $host = str_replace('www.', null, $_SERVER['HTTP_HOST']);
+            $host = str_replace('www.', '', $_SERVER['HTTP_HOST']);
 
             // Check for a specific db column existence for cases prior to the column being established (dev/build etc.)
             $columnExists = (bool) DB::query('SHOW columns from "SiteTree" WHERE "field" = \'HomepageForDomain\'')
@@ -37,7 +38,6 @@ class RootURLControllerExtension extends Extension
                 }
             }
         }
-
         return $link;
     }
 }
